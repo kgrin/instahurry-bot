@@ -147,9 +147,9 @@ class Task {
                 set
                     is_deleted = 1
                 where
-                    instagram_account_id = ${this.instagramAccount.id}
-                and action_type = ${this.actionType}
-                and status_id = 0`
+                     instagram_account_id = ${this.instagramAccount.id}
+                 and action_type = ${this.actionType}
+                 and status_id = 0`
             );
         }
     }

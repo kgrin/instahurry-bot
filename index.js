@@ -185,6 +185,27 @@ const Proxy = require('./models/Proxy');
                 });
             }
         });
+
+        app.get('/checkProxyProvider', async (request, response) => {
+            let providerId = request.query.provider_id;
+            let url = request.query.url;
+            let timeout = request.query.timeout;
+
+            if (providerId && url && timeout) {
+                logger.warning(`[SERVER] checkProxyProvider [providerId = ${providerId}] [url = ${url}] [timeout = ${timeout}]`);
+
+                await Proxy.checkProvider(providerId, url, timeout);
+
+                response.send({
+                    status: 'ok',
+                });
+            } else {
+                response.send({
+                    status: 'error',
+                    message: 'no [providerId] and/or [url] and/or [timeout]',
+                });
+            }
+        });
     } catch (e) {
         logger.error(e.message);
     }
